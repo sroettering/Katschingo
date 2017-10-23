@@ -1,5 +1,4 @@
 <div class="grid-container">
-  <div class="penalty-container" *ngFor="let penalty of penalties">
-    <penalty-card></penalty-card>
-  </div>
+  <penalty-card [penalty]="penalty" *ngFor="let penalty of penalties">
+  </penalty-card>
 </div>

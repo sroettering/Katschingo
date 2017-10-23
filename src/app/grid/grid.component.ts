@@ -17,13 +17,16 @@ export class GridComponent implements OnInit {
   @Input()
   user: string;
 
-  penalties: Array<Penalty>;
+  penalties: Array<Penalty> = [];
 
   constructor(private backand: BackandService) { }
 
   ngOnInit() {
-    Observable.fromPromise(this.backand.query.get('findPenaltiesForNickname', { nickname: 'timtilch' }))
-      .subscribe(response => this.penalties = response['data']);
+    const nickname = this.user || 'timtilch';
+    Observable.fromPromise(this.backand.query.get('findPenaltiesForNickname', { nickname }))
+      .map(response => response['data'])
+      .map(penalties => penalties.sort((penA, penB) => penA.gridIndex - penB.gridIndex))
+      .subscribe(penalties => this.penalties = penalties);
   }
 
 }

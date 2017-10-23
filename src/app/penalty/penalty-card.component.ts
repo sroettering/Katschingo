@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Penalty } from '../models/penalty';
 
 @Component({
   selector: 'penalty-card',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PenaltyCardComponent implements OnInit {
 
+  @Input()
+  penalty: Penalty;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.penalty);
   }
 
 }

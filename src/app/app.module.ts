@@ -14,7 +14,7 @@ import { PenaltyCardComponent } from './penalty/penalty-card.component';
     PenaltyCardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [
     PenaltyService,
