@@ -27,6 +27,6 @@ export class AppComponent implements OnInit {
     .then(response => {
       console.log(response);
     })
-    .catch(error => { });
+    .catch(error => console.log(error));
  }
 }

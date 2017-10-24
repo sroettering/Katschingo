@@ -1,3 +1,13 @@
+@import "variables";
+
+:host {
+  height: calc(#{$width} / #{$numCells});
+}
+
 .grid-cell {
   display: inline-block;
+  height: calc(#{$width} / #{$numCells});
+  width: calc(#{$width} / #{$numCells});
+  border: 1px solid $secondary-font-color;
+  border-radius: 2px;
 }

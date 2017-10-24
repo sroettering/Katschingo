@@ -4,6 +4,7 @@ import { BackandService } from '@backand/angular2-sdk';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 import { Penalty } from '../models/penalty';
 
@@ -17,7 +18,7 @@ export class GridComponent implements OnInit {
   @Input()
   user: string;
 
-  penalties: Array<Penalty> = [];
+  penalties: Array<Penalty> = Array(25).fill({} as Penalty);
 
   constructor(private backand: BackandService) { }
 
@@ -26,7 +27,12 @@ export class GridComponent implements OnInit {
     Observable.fromPromise(this.backand.query.get('findPenaltiesForNickname', { nickname }))
       .map(response => response['data'])
       .map(penalties => penalties.sort((penA, penB) => penA.gridIndex - penB.gridIndex))
-      .subscribe(penalties => this.penalties = penalties);
+      .do(penalties => this.insertPenalties(penalties))
+      .subscribe();
+  }
+
+  insertPenalties(penalties: Array<Penalty>) {
+    penalties.forEach(penalty => this.penalties[penalty.gridIndex] = penalty);
   }
 
 }
