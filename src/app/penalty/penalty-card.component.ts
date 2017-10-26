@@ -14,7 +14,7 @@ export class PenaltyCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.penalty);
+
   }
 
 }

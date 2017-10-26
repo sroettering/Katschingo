@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BackandService } from '@backand/angular2-sdk';
 
 import { AppComponent } from './app.component';
-import { PenaltyService } from './services/penalty.service';
+import { KatschingoService } from './services/katschingo.service';
 import { GridComponent } from './grid/grid.component';
 import { PenaltyCardComponent } from './penalty/penalty-card.component';
 
@@ -17,7 +17,7 @@ import { PenaltyCardComponent } from './penalty/penalty-card.component';
     BrowserModule,
   ],
   providers: [
-    PenaltyService,
+    KatschingoService,
     BackandService,
   ],
   bootstrap: [AppComponent]

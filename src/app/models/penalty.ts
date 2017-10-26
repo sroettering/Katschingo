@@ -1,7 +1,7 @@
 export interface Penalty {
-  id: string;
+  id: number;
   description: string;
   fine: string;
   gridIndex: number;
   paid: boolean;
-}
+};

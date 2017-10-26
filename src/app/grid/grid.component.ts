@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { BackandService } from '@backand/angular2-sdk';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
+import { KatschingoService } from '../services/katschingo.service';
 import { Penalty } from '../models/penalty';
 
 @Component({
@@ -20,15 +20,12 @@ export class GridComponent implements OnInit {
 
   penalties: Array<Penalty> = Array(25).fill({} as Penalty);
 
-  constructor(private backand: BackandService) { }
+  constructor(private katschingo: KatschingoService) { }
 
   ngOnInit() {
     const nickname = this.user || 'timtilch';
-    Observable.fromPromise(this.backand.query.get('findPenaltiesForNickname', { nickname }))
-      .map(response => response['data'])
-      .map(penalties => penalties.sort((penA, penB) => penA.gridIndex - penB.gridIndex))
-      .do(penalties => this.insertPenalties(penalties))
-      .subscribe();
+    this.katschingo.getPenalties(nickname)
+      .subscribe(penalties => this.insertPenalties(penalties));
   }
 
   insertPenalties(penalties: Array<Penalty>) {
